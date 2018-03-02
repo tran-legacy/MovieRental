@@ -25,8 +25,13 @@ const int ClassicMovie::getReleaseMonth() const {
 	return releaseMonth;
 }
 
-bool ClassicMovie::operator==(const ClassicMovie* movieObj) const {
-	if (this->directorName == movieObj->getDirectorName() &&
+// Not being called for some reason
+bool ClassicMovie::operator==(const Movie* movieObjOrig) const {
+	cout << "Entered ==" << endl;
+	const ClassicMovie* movieObj = dynamic_cast<const ClassicMovie*>(movieObjOrig);
+	if (this == movieObj) return true;
+
+	else if (this->directorName == movieObj->getDirectorName() &&
 		this->movieTitle == movieObj->getMovieTitle() &&
 		this->releaseYear == movieObj->getReleaseYear() &&
 		this->majorActor == movieObj->getMajorActor() &&
@@ -38,7 +43,32 @@ bool ClassicMovie::operator==(const ClassicMovie* movieObj) const {
 	}
 }
 
-bool ClassicMovie::operator<(const Movie * movieObj) const{
+bool ClassicMovie::operator<(const Movie * movieObjOrig) const{
+	const ClassicMovie* movieObj = dynamic_cast<const ClassicMovie*>(movieObjOrig);
+	if (this->releaseMonth < movieObj->getReleaseMonth()) {
+		return true;
+	}
+	else if (this->releaseMonth > movieObj->getReleaseMonth()) {
+		return false;
+	}
+	// Months are equal, move to year
+	else {
+		if (this->releaseYear < movieObj->getReleaseYear()) {
+			return true;
+		}
+		else if (this->releaseYear > movieObj->getReleaseYear()) {
+			return false;
+		}
+		// Years are equal, move to major actor
+		else {
+			if (this->majorActor < movieObj->getMajorActor()) {
+				return true;
+			}
+			else if (this->majorActor > movieObj->getMajorActor()) {
+				return false;
+			}
+		}
+	}
 	return false;
 }
 

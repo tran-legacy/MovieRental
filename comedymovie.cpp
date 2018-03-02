@@ -12,7 +12,11 @@ void ComedyMovie::print() const{
 }
 
 bool ComedyMovie::operator==(const Movie* movieObj) const {
-	if (this->directorName == movieObj->getDirectorName() &&
+	cout << "CALLED?????" << endl;
+
+	if (this == movieObj) return true;
+
+	else if (this->directorName == movieObj->getDirectorName() &&
 		this->movieTitle == movieObj->getMovieTitle() &&
 		this->releaseYear == movieObj->getReleaseYear()) {
 		return true;
@@ -22,10 +26,28 @@ bool ComedyMovie::operator==(const Movie* movieObj) const {
 	}
 }
 
+// Operator <
+// Sorted by Title, then Release Year
 bool ComedyMovie::operator<(const Movie * movieObj) const{
+	cout << "TEST this method to make sure its correct" << endl;
+	if (this->movieTitle < movieObj->getMovieTitle()) {
+		return true;
+	}
+	else if (this->movieTitle > movieObj->getMovieTitle()) {
+		return false;
+	}
+	// Movie Titles are equal, check Release Year
+	else {
+		if (this->releaseYear < movieObj->getReleaseYear()) {
+			return true;
+		}
+		else if (this->releaseYear > movieObj->getReleaseYear()) {
+			return false;
+		}
+	}
 	return false;
 }
 
 bool ComedyMovie::operator>(const Movie * movieObj) const{
-	return false;
+	return !(this < movieObj);
 }

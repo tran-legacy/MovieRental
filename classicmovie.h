@@ -13,7 +13,7 @@ public:
 
 	void print() const override;
 
-	bool operator==(const ClassicMovie* obj) const override;
+	bool operator==(const Movie* movieobj) const override;
 	bool operator<(const Movie* movieObj) const override;
 	bool operator>(const Movie* movieObj) const override;
 
