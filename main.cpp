@@ -27,7 +27,6 @@ int main() {
 	bool x = movie3 == movie3;
 	cout << (movie3 == movie4) << "<--should be 1" << endl;
 
-	
 	////// Drama Movie
 	Movie* dramaMovie1 = new DramaMovie("Nick Nelson", "I'm just a boi", 2018);
 	Movie* dramaMovie2 = new DramaMovie("Nick Nelson", "I'm just a boi", 2018);
@@ -42,8 +41,6 @@ int main() {
 	Movie* comedyMovie2 = new ComedyMovie("Well Hello", "Space Balls", 3000);
 	Movie* comedyMovie3 = new ComedyMovie("Obama Obama", "Space Balls", 3000);
 
-
-	cout << "Comedy test = " << (comedyMovie1 ==  comedyMovie3)<< endl;
 	cout << comedyMovie1->operator==(comedyMovie1) << endl;
 
 

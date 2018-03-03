@@ -27,44 +27,34 @@ const int ClassicMovie::getReleaseMonth() const {
 
 // Not being called for some reason
 bool ClassicMovie::operator==(const Movie* movieObjOrig) const {
-	cout << "Entered ==" << endl;
 	const ClassicMovie* movieObj = dynamic_cast<const ClassicMovie*>(movieObjOrig);
+	// 
 	if (this == movieObj) return true;
-
-	else if (this->directorName == movieObj->getDirectorName() &&
+	// Check if all fields are equal to each other
+	return this->directorName == movieObj->getDirectorName() &&
 		this->movieTitle == movieObj->getMovieTitle() &&
 		this->releaseYear == movieObj->getReleaseYear() &&
 		this->majorActor == movieObj->getMajorActor() &&
-		this->releaseMonth == movieObj->getReleaseMonth()) {
-		return true;
-	}
-	else {
-		return false;
-	}
+		this->releaseMonth == movieObj->getReleaseMonth();
 }
 
 bool ClassicMovie::operator<(const Movie * movieObjOrig) const{
+	// Cast the Movie* into classic movie so we have access to its data
 	const ClassicMovie* movieObj = dynamic_cast<const ClassicMovie*>(movieObjOrig);
-	if (this->releaseMonth < movieObj->getReleaseMonth()) {
+
+	if (this->releaseYear < movieObj->getReleaseYear()) {  // Check if year is equal
 		return true;
-	}
-	else if (this->releaseMonth > movieObj->getReleaseMonth()) {
+	} else if (this->releaseYear > movieObj->getReleaseYear()) {
 		return false;
-	}
-	// Months are equal, move to year
-	else {
-		if (this->releaseYear < movieObj->getReleaseYear()) {
+	} else { // Years are equal, move to months
+		if (this->releaseMonth < movieObj->getReleaseMonth()) {
 			return true;
-		}
-		else if (this->releaseYear > movieObj->getReleaseYear()) {
+		} else if (this->releaseMonth > movieObj->getReleaseMonth()) {
 			return false;
-		}
-		// Years are equal, move to major actor
-		else {
+		} else { // Months are equal, check actor
 			if (this->majorActor < movieObj->getMajorActor()) {
 				return true;
-			}
-			else if (this->majorActor > movieObj->getMajorActor()) {
+			} else if (this->majorActor > movieObj->getMajorActor()) {
 				return false;
 			}
 		}
@@ -73,5 +63,5 @@ bool ClassicMovie::operator<(const Movie * movieObjOrig) const{
 }
 
 bool ClassicMovie::operator>(const Movie * movieObj) const{
-	return false;
+	return !(this < movieObj);
 }
