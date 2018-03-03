@@ -33,16 +33,11 @@ int main() {
 	
 	cout << (dramaMovie1 == dramaMovie2) << "<-- should be 1 (test drama movie == )" << endl;
 
-	// Operator <
-	////// Classic Movie
 
 	////// Comedy Movie
 	Movie* comedyMovie1 = new ComedyMovie("Obama Obama", "Space Balls", 3000);
-	Movie* comedyMovie2 = new ComedyMovie("Well Hello", "Space Balls", 3000);
-	Movie* comedyMovie3 = new ComedyMovie("Obama Obama", "Space Balls", 3000);
-
-	cout << comedyMovie1->operator==(comedyMovie1) << endl;
 
 
+	
 	return 0;
 }
