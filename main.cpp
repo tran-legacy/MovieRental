@@ -54,7 +54,6 @@ void testingOpEquals() {
 	Movie* dramaMovie2 = new DramaMovie("Nick Nelson", "I'm just a boi", 2018);
 	Movie* dramaMovie3 = new DramaMovie("SAMMY JONES", "I'm just a boi", 2018);
 
-<<<<<<< HEAD
 	assert(dramaMovie1==(dramaMovie2) == true);
 	assert(dramaMovie1==(dramaMovie3) == false);
 	cout << "-- Drama operator == passed" << endl;
