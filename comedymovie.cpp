@@ -11,43 +11,35 @@ void ComedyMovie::print() const{
 		<< ", " << this->releaseYear << endl;
 }
 
-bool ComedyMovie::operator==(const Movie* movieObj) const {
-	cout << "CALLED?????" << endl;
+bool ComedyMovie::operator==(const Movie& movieObj) const {
+	if (this == &movieObj) return true;
 
-	if (this == movieObj) return true;
-
-	else if (this->directorName == movieObj->getDirectorName() &&
-		this->movieTitle == movieObj->getMovieTitle() &&
-		this->releaseYear == movieObj->getReleaseYear()) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return (this->directorName == movieObj.getDirectorName() &&
+		this->movieTitle == movieObj.getMovieTitle() &&
+		this->releaseYear == movieObj.getReleaseYear());
 }
 
 // Operator <
 // Sorted by Title, then Release Year
-bool ComedyMovie::operator<(const Movie * movieObj) const{
-	cout << "TEST this method to make sure its correct" << endl;
-	if (this->movieTitle < movieObj->getMovieTitle()) {
+bool ComedyMovie::operator<(const Movie& movieObj) const{
+	if (this->movieTitle < movieObj.getMovieTitle()) {
 		return true;
 	}
-	else if (this->movieTitle > movieObj->getMovieTitle()) {
+	else if (this->movieTitle > movieObj.getMovieTitle()) {
 		return false;
 	}
 	// Movie Titles are equal, check Release Year
 	else {
-		if (this->releaseYear < movieObj->getReleaseYear()) {
+		if (this->releaseYear < movieObj.getReleaseYear()) {
 			return true;
 		}
-		else if (this->releaseYear > movieObj->getReleaseYear()) {
+		else if (this->releaseYear > movieObj.getReleaseYear()) {
 			return false;
 		}
 	}
 	return false;
 }
 
-bool ComedyMovie::operator>(const Movie * movieObj) const{
-	return !(this < movieObj);
+bool ComedyMovie::operator>(const Movie& movieObj) const{
+	return !(*this < movieObj);
 }

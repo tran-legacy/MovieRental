@@ -13,9 +13,9 @@ public:
 	virtual void print() const = 0;
 
 	// Operator overloading for sorting purposes
-	virtual bool operator==(const Movie* movieObj) const = 0;
-	virtual bool operator<(const Movie* movieObj) const = 0;
-	virtual bool operator>(const Movie* movieObj) const = 0;
+	virtual bool operator==(const Movie& movieObj) const = 0;
+	virtual bool operator<(const Movie& movieObj) const = 0;
+	virtual bool operator>(const Movie& movieObj) const = 0;
 
 	const string getMovieTitle() const ;
 	const string getDirectorName() const;

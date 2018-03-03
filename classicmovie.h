@@ -13,9 +13,9 @@ public:
 
 	void print() const override;
 
-	bool operator==(const Movie* movieobj) const override;
-	bool operator<(const Movie* movieObj) const override;
-	bool operator>(const Movie* movieObj) const override;
+	bool operator==(const Movie& movieobj) const override;
+	bool operator<(const Movie& movieObj) const override;
+	bool operator>(const Movie& movieObj) const override;
 
 	const string getMajorActor() const;
 	const int getReleaseMonth() const;

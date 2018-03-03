@@ -12,9 +12,9 @@ public:
 		       const int releaseYear);
 	virtual ~DramaMovie();
 
-	bool operator==(const Movie* obj) const override;
-	bool operator<(const Movie* movieObj) const override;
-	bool operator>(const Movie* movieObj) const override;
+	bool operator==(const Movie& obj) const override;
+	bool operator<(const Movie& movieObj) const override;
+	bool operator>(const Movie& movieObj) const override;
 
 	void print() const override;
 
