@@ -10,9 +10,7 @@ public:
 	bool addCustomer(const int ID, const string firstName, 
 		const string lastName); 
 private: 
+	// Array of customer vectors
 	vector<Customer*> custList[30];
 };
 #endif // !CUSTOMERLIST_H
-
-
-
