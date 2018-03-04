@@ -10,7 +10,11 @@ public:
 	void increaseQuantity(const int quantity);
 	void decreaseQuantity(const int quantity);
 
-	void setMediaType(const char mediaType); 
+	void setMediaType(const char mediaType);
+
+	int getQuantity() const;
+	Movie* getMovie() const;
+	char getMediaType() const;
 private:
 	// Private enum, can easily add new media type
 	enum Media { DVD };

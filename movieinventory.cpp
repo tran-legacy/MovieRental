@@ -26,3 +26,21 @@ void MovieInventory::setMediaType(const char mediaType) {
 		cout << "DVD" << endl; 
 	}
 }
+
+int MovieInventory::getQuantity() const {
+	return this->quantity;
+}
+
+Movie * MovieInventory::getMovie() const {
+	return this->movie;
+}
+
+char MovieInventory::getMediaType() const {
+	// In the future, when there are more media types
+	// there'll be more if blocks
+	if (this->type == DVD) {
+		return 'D'; 
+	}
+	// But for now, all movies are DVDs
+	return 'D'; 
+}
