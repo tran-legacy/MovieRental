@@ -18,7 +18,7 @@ public:
 private:
 	int ID; 
 	string firstName; 
-	string lastName; 
+	string lastName;
 	History history;
 };
 #endif // !CUSTOMER_H
