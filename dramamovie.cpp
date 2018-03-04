@@ -11,39 +11,34 @@ void DramaMovie::print() const {
 		<< ", " << this->releaseYear << endl;
 }
 
-bool DramaMovie::operator==(const Movie* movieObj) const {
-	if (this == movieObj) return true;
+bool DramaMovie::operator==(const Movie& movieObj) const {
+	if (this == &movieObj) return true;
 
-	else if (this->directorName == movieObj->getDirectorName() &&
-		this->movieTitle == movieObj->getMovieTitle() &&
-		this->releaseYear == movieObj->getReleaseYear()) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return this->directorName == movieObj.getDirectorName() &&
+		this->movieTitle == movieObj.getMovieTitle() &&
+		this->releaseYear == movieObj.getReleaseYear();
 }
 
 // Operator <
 // Sort by director then title
-bool DramaMovie::operator<(const Movie * movieObj) const {
-	if (this->directorName < movieObj->getDirectorName()) {
+bool DramaMovie::operator<(const Movie& movieObj) const {
+	if (this->directorName < movieObj.getDirectorName()) {
 		return true;
 	}
-	else if (this->directorName > movieObj->getDirectorName()) {
+	else if (this->directorName > movieObj.getDirectorName()) {
 		return false;
 	}
 	// Director names equal, move to title
 	else {
-		if (this->movieTitle < movieObj->getMovieTitle()) {
+		if (this->movieTitle < movieObj.getMovieTitle()) {
 			return true;
 		}
-		else if (this->movieTitle > movieObj->getMovieTitle()) {
+		else if (this->movieTitle > movieObj.getMovieTitle()) {
 		}
 		return false;
 	}
 }
 
-bool DramaMovie::operator>(const Movie * movieObj) const{
-	return false;
+bool DramaMovie::operator>(const Movie& movieObj) const{
+	return !(*this < movieObj);
 }

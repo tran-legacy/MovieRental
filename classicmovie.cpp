@@ -26,35 +26,34 @@ const int ClassicMovie::getReleaseMonth() const {
 }
 
 // Not being called for some reason
-bool ClassicMovie::operator==(const Movie* movieObjOrig) const {
-	const ClassicMovie* movieObj = dynamic_cast<const ClassicMovie*>(movieObjOrig);
-	// 
-	if (this == movieObj) return true;
+bool ClassicMovie::operator==(const Movie& movieObjOrig) const {
+	const ClassicMovie& movieObj = dynamic_cast<const ClassicMovie&>(movieObjOrig);
+	if (this == &movieObj) return true;
 	// Check if all fields are equal to each other
-	return this->directorName == movieObj->getDirectorName() &&
-		this->movieTitle == movieObj->getMovieTitle() &&
-		this->releaseYear == movieObj->getReleaseYear() &&
-		this->majorActor == movieObj->getMajorActor() &&
-		this->releaseMonth == movieObj->getReleaseMonth();
+	return (this->directorName == movieObj.getDirectorName() &&
+		this->movieTitle == movieObj.getMovieTitle() &&
+		this->releaseYear == movieObj.getReleaseYear() &&
+		this->majorActor == movieObj.getMajorActor() &&
+		this->releaseMonth == movieObj.getReleaseMonth());
 }
 
-bool ClassicMovie::operator<(const Movie * movieObjOrig) const{
+bool ClassicMovie::operator<(const Movie& movieObjOrig) const{
 	// Cast the Movie* into classic movie so we have access to its data
-	const ClassicMovie* movieObj = dynamic_cast<const ClassicMovie*>(movieObjOrig);
+	const ClassicMovie movieObj = dynamic_cast<const ClassicMovie&>(movieObjOrig);
 
-	if (this->releaseYear < movieObj->getReleaseYear()) {  // Check if year is equal
+	if (this->releaseYear < movieObj.getReleaseYear()) {  // Check if year is equal
 		return true;
-	} else if (this->releaseYear > movieObj->getReleaseYear()) {
+	} else if (this->releaseYear > movieObj.getReleaseYear()) {
 		return false;
 	} else { // Years are equal, move to months
-		if (this->releaseMonth < movieObj->getReleaseMonth()) {
+		if (this->releaseMonth < movieObj.getReleaseMonth()) {
 			return true;
-		} else if (this->releaseMonth > movieObj->getReleaseMonth()) {
+		} else if (this->releaseMonth > movieObj.getReleaseMonth()) {
 			return false;
 		} else { // Months are equal, check actor
-			if (this->majorActor < movieObj->getMajorActor()) {
+			if (this->majorActor < movieObj.getMajorActor()) {
 				return true;
-			} else if (this->majorActor > movieObj->getMajorActor()) {
+			} else if (this->majorActor > movieObj.getMajorActor()) {
 				return false;
 			}
 		}
@@ -62,6 +61,6 @@ bool ClassicMovie::operator<(const Movie * movieObjOrig) const{
 	return false;
 }
 
-bool ClassicMovie::operator>(const Movie * movieObj) const{
-	return !(this < movieObj);
+bool ClassicMovie::operator>(const Movie& movieObj) const{
+	return !(*this < movieObj);
 }
