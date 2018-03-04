@@ -43,3 +43,13 @@ bool ComedyMovie::operator<(const Movie& movieObj) const{
 bool ComedyMovie::operator>(const Movie& movieObj) const{
 	return !(*this < movieObj);
 }
+
+Movie& ComedyMovie::operator=(const Movie& movieObj) {
+	if (this == &movieObj) return *this;
+
+	this->directorName = movieObj.getDirectorName();
+	this->movieTitle = movieObj.getMovieTitle();
+	this->releaseYear = movieObj.getReleaseYear();
+
+	return *this;
+}

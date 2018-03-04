@@ -4,7 +4,7 @@
 
 class MovieInventory {
 public: 
-	MovieInventory(const Movie* m, const int quantity, char mediaType); 
+	MovieInventory(Movie* m, const int quantity, char mediaType); 
 	virtual ~MovieInventory();
 
 	void increaseQuantity(const int quantity);
@@ -16,7 +16,5 @@ private:
 	Movie* movie; 
 	int quantity; 
 	Media type;
-
-	
 };
 #endif // !MOVIEINVENTORY_H

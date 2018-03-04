@@ -39,7 +39,7 @@ bool ClassicMovie::operator==(const Movie& movieObjOrig) const {
 
 bool ClassicMovie::operator<(const Movie& movieObjOrig) const{
 	// Cast the Movie* into classic movie so we have access to its data
-	const ClassicMovie movieObj = dynamic_cast<const ClassicMovie&>(movieObjOrig);
+	const ClassicMovie& movieObj = dynamic_cast<const ClassicMovie&>(movieObjOrig);
 
 	if (this->releaseYear < movieObj.getReleaseYear()) {  // Check if year is equal
 		return true;
@@ -64,3 +64,18 @@ bool ClassicMovie::operator<(const Movie& movieObjOrig) const{
 bool ClassicMovie::operator>(const Movie& movieObj) const{
 	return !(*this < movieObj);
 }
+
+Movie& ClassicMovie::operator=(const Movie& movieObj) {
+	if (this == &movieObj) return *this;
+	// Cast the Movie* into classic movie so we have access to its data
+	const ClassicMovie& movieToCopy = dynamic_cast<const ClassicMovie&>(movieObj);
+
+	this->directorName = movieToCopy.getDirectorName();
+	this->movieTitle = movieToCopy.getMovieTitle();
+	this->releaseYear = movieToCopy.getReleaseYear();
+	this->releaseMonth = movieToCopy.getReleaseMonth();
+	this->majorActor = movieToCopy.getMajorActor();
+
+	return *this;
+}
+
