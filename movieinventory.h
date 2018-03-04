@@ -10,11 +10,13 @@ public:
 	void increaseQuantity(const int quantity);
 
 private:
+	// Private enum, can easily add new media type
+	enum Media { DVD };
+
 	Movie* movie; 
 	int quantity; 
 	Media type;
 
-	// Private enum, can easily add new media type
-	enum Media {DVD};
+	
 };
 #endif // !MOVIEINVENTORY_H
