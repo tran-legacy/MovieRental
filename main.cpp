@@ -70,10 +70,8 @@ void testingOpEquals() {
 }
 
 void testingGreaterLess() {
-	cout << "\n**** Testing: < and >" << endl;
+	cout << "\n**** Testing (OK): < and >" << endl;
 	////// Classic Movie
-	cout << "**** Testing: Classic Movie" << endl;
-
 	MovieFactory f;
 	Movie* C1 = f.makeMovie('C', "Ball beep", "I'm Just a boii", 2000, "Fahad", 5);
 	Movie* C2 = f.makeMovie('C', "Ball beep", "I'm Just a boii", 2001, "Fahad", 5);
@@ -96,10 +94,6 @@ void testingGreaterLess() {
 	Movie* Com3 = f.makeMovie('F', "B", "I'm just a boi", 10);
 
 	assert(*Com1<(*Com2) == false);
-	cout << "Com2 release year = " << Com2->getReleaseYear() << endl;
-	cout << "Com3 release year = " << Com3->getReleaseYear() << endl;
-
-	//assert(*Com2>(*Com3) == false);
 
 	////// Drama Movie
 	Movie* d1 = f.makeMovie('D',"A", "A", 1);

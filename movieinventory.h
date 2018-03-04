@@ -5,10 +5,12 @@
 class MovieInventory {
 public: 
 	MovieInventory(Movie* m, const int quantity, char mediaType); 
-	virtual ~MovieInventory();
+	virtual ~MovieInventory() {};
 
 	void increaseQuantity(const int quantity);
+	void decreaseQuantity(const int quantity);
 
+	void setMediaType(const char mediaType); 
 private:
 	// Private enum, can easily add new media type
 	enum Media { DVD };
