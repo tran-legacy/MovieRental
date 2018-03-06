@@ -3,20 +3,27 @@
 #include "movie.h"
 
 class MovieInventory {
-public: 
+public:
+	// Constructor
 	MovieInventory(Movie* m, const int quantity, char mediaType); 
-	virtual ~MovieInventory() {};
+	// Destructor
+	virtual ~MovieInventory();
 
+	// For managing quantity of this Movie
 	void increaseQuantity(const int quantity);
 	void decreaseQuantity(const int quantity);
 
-	void setMediaType(const char mediaType);
+	// Not sure if we'll need this, keeping it commented it out for now
+	//void setMediaType(const char mediaType);
 
+	// Getters for stuff
 	int getQuantity() const;
 	Movie* getMovie() const;
 	char getMediaType() const;
+
 private:
-	// Private enum, can easily add new media type
+	// Private enum, can easily add new media type when the store expands 
+	// i.e. Bluray, 4K Bluray, VCR, digital, etc...
 	enum Media { DVD };
 
 	Movie* movie; 

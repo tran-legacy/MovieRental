@@ -1,12 +1,19 @@
 #include "customer.h"
-
-Customer::Customer(const int ID, const string firstName, const string lastName)
-	: ID(ID), firstName(firstName), lastName(lastName) {}
+#include <iostream>
+Customer::Customer(const int ID, const string customerName)
+	: ID(ID), customerName(customerName) {}
 
 void Customer::printHistory() const {
+	cout << "***History of " << this->ID << "(" << this->customerName 
+		<< ")***" << endl;
 	history.print();
 }
 
 void Customer::addIntoHistory(const string& customerTransaction) {
+	// Call the History class add() function to add a new customer transaction
 	history.add(customerTransaction);
+}
+
+int Customer::getID() const {
+	return this->ID;
 }

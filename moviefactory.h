@@ -10,8 +10,10 @@ using namespace std;
 
 class MovieFactory {
 public:
+	// Constructor
 	MovieFactory() {}
-	~MovieFactory() {};
+	// Destructor
+	~MovieFactory() {}
 
 	// For making comedy and drama movies
 	Movie* makeMovie(const char genre, const string& directorName, 
