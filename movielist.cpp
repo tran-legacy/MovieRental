@@ -11,7 +11,7 @@ MovieList::~MovieList() {}
 bool MovieList::incrementMovie(const char mediaType, const int releaseMonth, 
 	const int releaseYear, const string& majorActor) {
 	// Loop through the classic movie bucket
-	for (int i = 0; i < movieList[C].size(); ++i) {
+	for (size_t i = 0; i < movieList[C].size(); ++i) {
 		Movie* classicM = movieList[C][i].getMovie();
 		// Dynamic cast so it knows what to call 
 		const ClassicMovie* classicMovie = dynamic_cast<const ClassicMovie*>(classicM);
@@ -30,7 +30,7 @@ bool MovieList::incrementMovie(const char mediaType, const int releaseMonth,
 // Decrement for classic movie
 bool MovieList::decrementMovie(const char mediaType, const int releaseMonth, const int releaseYear, const string & majorActor) {
 	// Loop through the classic movie bucket
-	for (int i = 0; i < movieList[C].size(); ++i) {
+	for (size_t i = 0; i < movieList[C].size(); ++i) {
 		Movie* classicM = movieList[C][i].getMovie();
 		// Dynamic cast so it knows what to call 
 		const ClassicMovie* classicMovie = dynamic_cast<const ClassicMovie*>(classicM);
@@ -58,11 +58,11 @@ bool MovieList::decrementMovie(const char mediaType, const int releaseMonth, con
 bool MovieList::incrementMovie(const char mediaType, const string& title, 
 	const int releaseYear) {
 	// For each movie in the comedy movie bucket
-	for (int i = 0; i < movieList[F].size(); ++i) {
+	for (size_t i = 0; i < movieList[F].size(); ++i) {
 		Movie* comedyM = movieList[F][i].getMovie();
 		// if the values match, we found the movie in the bucket
 		if (comedyM->getMovieTitle() == title &&
-			comedyM->getReleaseYear = releaseYear) {
+			comedyM->getReleaseYear() == releaseYear) {
 			movieList[F][i].increaseQuantity(1);
 			return true;
 		}
@@ -75,12 +75,12 @@ bool MovieList::incrementMovie(const char mediaType, const string& title,
 bool MovieList::decrementMovie(const char mediaType, const string & title, 
 	const int releaseYear) {
 	// For each movie in the comedy movie bucket
-	for (int i = 0; i < movieList[F].size(); ++i) {
+	for (size_t i = 0; i < movieList[F].size(); ++i) {
 		Movie* comedyM = movieList[F][i].getMovie();
-		// if the values match, we found the movie in the bucket
+		// if the values match
 		if (comedyM->getMovieTitle() == title &&
-			comedyM->getReleaseYear = releaseYear) {
-
+			comedyM->getReleaseYear() == releaseYear) {
+			
 			movieList[F][i].increaseQuantity(1);
 			return true;
 		}
