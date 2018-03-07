@@ -17,7 +17,7 @@ void ClassicMovie::print() const {
 		<< this->releaseYear << endl;
 }
 
-const string ClassicMovie::getMajorActor() const {
+const string& ClassicMovie::getMajorActor() const {
 	return majorActor;
 }
 

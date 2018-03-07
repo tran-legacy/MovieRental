@@ -18,7 +18,7 @@ public:
 	bool operator>(const Movie& movieObj) const override;
 	Movie& operator=(const Movie& movieObj) override;
 
-	const string getMajorActor() const;
+	const string& getMajorActor() const;
 	const int getReleaseMonth() const;
 
 private:

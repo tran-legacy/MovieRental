@@ -10,6 +10,8 @@ public:
 	virtual ~MovieInventory();
 
 	// For managing quantity of this Movie
+	// We're assuming right now there'll only be DVDs 
+	// If we have other media types, these will need another parameter
 	void increaseQuantity(const int quantity);
 	void decreaseQuantity(const int quantity);
 
@@ -17,17 +19,20 @@ public:
 	//void setMediaType(const char mediaType);
 
 	// Getters for stuff
+	// ASSUMPTION: only DVDs right now
+	// If we have other media types, get quantity will need a parameter that specifies 
+	// which media type quantity they're looking for
 	int getQuantity() const;
 	Movie* getMovie() const;
-	char getMediaType() const;
 
 private:
-	// Private enum, can easily add new media type when the store expands 
-	// i.e. Bluray, 4K Bluray, VCR, digital, etc...
-	enum Media { DVD };
+	// This is the index of DVD
+	// Can easily add new media types in the future
+	const static int DVD = 0; 
 
-	Movie* movie; 
-	int quantity; 
-	Media type;
+	Movie* movie;
+	// Size of 1 currently because we only have 1 media type
+	int mediaQuantity[1];
+
 };
 #endif // !MOVIEINVENTORY_H
