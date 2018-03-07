@@ -3,7 +3,7 @@
 
 void History::print() const {
 	// For each transaction in history, cout it
-	for (int i = history.size(); i >= 0; --i) 
+	for (int i = history.size() - 1; i >= 0; --i) 
 		cout << history[i] << endl;
 }
 
