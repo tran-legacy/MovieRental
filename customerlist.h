@@ -11,11 +11,9 @@ public:
 	~CustomerList();
 
 	// Adding a new customer into the list
-	// Handles duplications
+	// Handles duplications and ID validation
 	bool addCustomer(const int ID, const string& customerName);
-	// Our stupid hash function
-	int hash(const int ID) const;
-	// Get a customer by ID
+	// Get a customer by ID, will return nullptr if ID does not exist
 	Customer* getCustomer(const int ID); 
 private: 
 	// Const variable that is use for the modular hashing
@@ -23,6 +21,8 @@ private:
 	const static int SIZE = 238; 
 	// Array of customer vectors
 	vector<Customer*> custList[SIZE];
+	// Our stupid hash function
+	int hash(const int ID) const;
 
 
 };

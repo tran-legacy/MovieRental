@@ -16,10 +16,10 @@ public:
 	// Destructor
 	virtual ~MovieList();
 
-	// Adding a comedy or drama: will handle duplications 
+	// Adding a comedy or drama: will handle duplications and sorting
 	bool addMovie(const char genre, const string& directorName,
 		const string& movieTitle, const int releaseYear); 
-	// Adding a classic: will handle duplications 
+	// Adding a classic: will handle duplications and sorting
 	bool addMovie(const char genre, const string& directorName,
 		const string& movieTitle, const int releaseYear,
 		const string& majorActor, int releaseMonth); 
@@ -50,6 +50,8 @@ private:
 	const static int D = 1;
 	// Index 2: Classics (C)
 	const static int C = 2; 
+
+	const static char DVD = 'D';
 	vector<vector<MovieInventory>> movieList;
 };
 #endif // !MOVIELIST_H

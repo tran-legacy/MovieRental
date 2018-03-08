@@ -20,16 +20,21 @@ CustomerList::~CustomerList() {
 }
 
 bool CustomerList::addCustomer(const int ID, const string& customerName) {
-	int index = hash(ID); 
-	// Find if customer exists first
-	for (int i = 0; i < custList[index].size(); ++i) {
-		if (custList[index].at(i)->getID() == ID)  // if the ID exists, return false
-			cout << "ERROR: Customer " << ID << " already exists." << endl;
+	// Make sure ID is 4 digits
+	if (ID > 999 && ID < 10000) {
+		int index = hash(ID);
+		// Find if customer exists first
+		for (int i = 0; i < custList[index].size(); ++i) {
+			if (custList[index].at(i)->getID() == ID)  // if the ID exists, return false
+				cout << "ERROR: Customer " << ID << " already exists." << endl;
 			return false;
+		}
+		// Push the new customer into the correct bucket
+		custList[index].push_back(new Customer(ID, customerName));
+		return true;
 	}
-	// Push the new customer into the correct bucket
-	custList[index].push_back(new Customer(ID, customerName));
-	return true;
+	cout << "ERROR: " << ID << " is invalid. Needs to be 4 digits." << endl;
+	return false;
 }
 
 int CustomerList::hash(const int ID) const {
