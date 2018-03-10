@@ -34,6 +34,10 @@ const int ClassicMovie::getReleaseMonth() const {
 	return releaseMonth;
 }
 
+string ClassicMovie::getMajorActor() const {
+	return majorActor[0];
+}
+
 // Allows us to add a new major actor if it is different than currently in
 void ClassicMovie::addMajorActor(const string & actor){
 	majorActor.push_back(actor);

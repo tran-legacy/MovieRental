@@ -22,7 +22,8 @@ public:
 	bool findMajorActor(const string& actor) const;
 	// Returns release month
 	const int getReleaseMonth() const;
-
+	// Returns the first major actor 
+	string getMajorActor() const;
 	void addMajorActor(const string& actor);
 
 private:

@@ -44,8 +44,10 @@ public:
 	// Decrement  drama movies
 	bool decrementMovie(const char mediaType, const string& director, const string& title);
 
-	// Checks if media type is a DVD
-	bool isDVD(const char mediaType) const;
+	// For printing movies out in a FAnCy format
+	void printMovies() const;
+
+
 private:
 	// Index 0: Comedy (F)
 	const static int F = 0;
@@ -56,7 +58,9 @@ private:
 
 	const static char DVD = 'D';
 	vector<list<MovieInventory*>> movieList;
-
 	MovieFactory factory;
+
+	// Checks if media type is a DVD
+	bool isDVD(const char mediaType) const;
 };
 #endif // !MOVIELIST_H

@@ -144,8 +144,7 @@ void testMovieList() {
 	ml.decrementMovie('D', "Tran Le", "The Lion King");
 	ml.decrementMovie('D', "Tran Le", "The Lion King");
 	ml.decrementMovie('D', "Tran Le", "Blahblah");
-
-
+	ml.printMovies();
 }
 
 
@@ -159,29 +158,29 @@ int main() {
 	
 	testMovieList();
 	
-	//ifstream infile; 
-	//infile.open("data4movies.txt");
-	//if (infile.fail()) {
-	//	cout << "The file was not found." << endl;
-	//}
-	//string delimiter = ", ";
-	//string line;
+	/*ifstream infile; 
+	infile.open("data4movies.txt");
+	if (infile.fail()) {
+		cout << "The file was not found." << endl;
+	}
+	string delimiter = ", ";
+	string line;
 
-	//while (getline(infile, line)) {
-	//	istringstream iss(line); 
-	//	string genre, quantity, director, title, year;
-	//	size_t pos = 0; 
-	//	string token; 
-	//	while ((pos = line.find(delimiter)) != string::npos) {
-	//		token = line.substr(0, pos);
-	//		cout << token << endl;
-	//		line.erase(0, pos + delimiter.length());
-	//	}
-	//	int year = stoi(line);
-	//	cout << line;
-	//	cout << year << endl;
-	//	break;
-	//}
+	while (getline(infile, line)) {
+		istringstream iss(line); 
+		string genre, quantity, director, title, year;
+		size_t pos = 0; 
+		string token; 
+		while ((pos = line.find(delimiter)) != string::npos) {
+			token = line.substr(0, pos);
+			cout << token << endl;
+			line.erase(0, pos + delimiter.length());
+		}
+		int year = stoi(line);
+		cout << line;
+		cout << year << endl;
+		break;
+	}*/
 
 
 	return 0;

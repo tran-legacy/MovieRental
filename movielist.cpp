@@ -1,6 +1,6 @@
 #include "movielist.h"
 #include <iostream>
-
+#include <iomanip>
 // Empty movieList
 MovieList::MovieList() {
 	movieList.resize(3);
@@ -242,6 +242,73 @@ bool MovieList::decrementMovie(const char mediaType, const string & director, co
 		" movie does not exist in the store." << endl;
 	return false;
 
+}
+
+void MovieList::printMovies() const {
+	///////////////////////PRINTING OUT COMEDIES
+	cout << left << setfill('*') << setw(90) << "COMEDIES" << endl;
+	cout << setfill(' ') << left << setw(15) << "Quantity" << setw(20) << "Director"
+		<< setw(40) << "Title" << setw(10) << "Year" << endl;
+	cout << setw(15) << string(8, '-') << setw(20) << string(8, '-')
+		<< setw(40) << string(5, '-') << setw(10) << string(4, '-') << endl;
+
+	// For the comedy movie bucket
+	for (list<MovieInventory*>::const_iterator it = movieList[F].begin();
+		it != movieList[F].end(); ++it) {
+		Movie* currMovie = (*it)->getMovie();
+		cout << setw(15) << (*it)->getQuantity() << setw(20) 
+			<< currMovie->getDirectorName() << setw(40) 
+			<< currMovie->getMovieTitle()<< setw(10) 
+			<< currMovie->getReleaseYear() << endl;
+	}
+	cout << endl;
+
+	/////////////////////////// PRINTING OUT DRAMAS
+	cout << setfill('*') << setw(90) << "DRAMAS" << endl;
+	cout << setfill(' ') << left
+		<< setw(15) << "Quantity" 
+		<< setw(20) << "Director"
+		<< setw(40) << "Title" 
+		<< setw(10) << "Year" << endl;
+	cout << setw(15) << string(8, '-') << setw(20) << string(8, '-')
+		<< setw(40) << string(5, '-') << setw(10) << string(4, '-') << endl;
+
+	// For the drama movie bucket
+	for (list<MovieInventory*>::const_iterator it = movieList[D].begin();
+		it != movieList[D].end(); ++it) {
+		Movie* currMovie = (*it)->getMovie();
+		cout << setw(15) << (*it)->getQuantity() << setw(20)
+			<< currMovie->getDirectorName() << setw(40)
+			<< currMovie->getMovieTitle() << setw(10)
+			<< currMovie->getReleaseYear() << endl;
+	}
+	cout << endl;
+
+	/////////////////////////// PRINTING OUT GODDANG CLASSICS 
+	cout << setfill('*') << setw(110) << "CLASSICS" << endl;
+	cout << setfill(' ') << left << setw(15) << "Quantity" << setw(20) << "Director"
+		<< setw(40) << "Title"
+		<< setw(20) << "Major Actor"
+		<< setw(7) << "Month"
+		<< setw(10) << "Year" << endl;
+	cout << setw(15) << string(8, '-') << setw(20) << string(8, '-')
+		<< setw(40) << string(5, '-') << setw(20) << string(11, '-')
+		<< setw(7) << string(5, '-') << setw(10) << string(4, '-') << endl;
+
+	// For classic movies bucket
+	// 15, 20, 40, 20, 7, 10
+	for (list<MovieInventory*>::const_iterator it = movieList[C].begin();
+		it != movieList[C].end(); ++it) {
+		Movie* currMovie = (*it)->getMovie();
+		ClassicMovie* classicMovie = dynamic_cast<ClassicMovie*>(currMovie);
+		cout << setw(15) << (*it)->getQuantity() << setw(20)
+			<< currMovie->getDirectorName() << setw(40)
+			<< currMovie->getMovieTitle() << setw(20)
+			<< classicMovie->getMajorActor() << setw(7)
+			<< classicMovie->getReleaseMonth() << setw(10)
+			<< currMovie->getReleaseYear() << endl;
+	}
+	cout << endl;
 }
 
 bool MovieList::isDVD(const char mediaType) const {
