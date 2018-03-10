@@ -3,7 +3,7 @@
 
 #include "movielist.h"
 #include "customerlist.h"
-#include<iostream>
+#include <iostream>
 #include <fstream>
 using namespace std;
 
@@ -23,6 +23,9 @@ public:
 private:
 	CustomerList customerList; 
 	MovieList movieList;
+
+	void addMovieToMovieList(vector<string> tokens);
+
 };
 #endif // !STORE_H
 
