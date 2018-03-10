@@ -3,6 +3,9 @@
 #include "classicmovie.h"
 #include "dramamovie.h"
 #include "moviefactory.h"
+#include "customer.h"
+#include "customerlist.h"
+#include "movielist.h"
 #include <iostream>
 #include <string>
 #include <assert.h>
@@ -105,11 +108,55 @@ void testingGreaterLess() {
 
 }
 
+void testCustomer() {
+	Customer* TRAN = new Customer(1234, "Tran Leeeeeee");
+	TRAN->addIntoHistory("Monster will kill me in the end");
+	TRAN->addIntoHistory("Histry");
+	TRAN->addIntoHistory("Hello");
+	TRAN->printHistory();
+
+
+}
+
+void testCustomerList() {
+	CustomerList cList;
+	cList.addCustomer(1000, "Diego Guzman");
+	cList.addCustomer(1, "Tran Le");
+	cList.addCustomer(1001, "Tran Le");
+
+	Customer* diego = cList.getCustomer(1000);
+	diego->addIntoHistory("HISTORY");
+	diego->addIntoHistory("newer history");
+	diego->addIntoHistory("newest history");
+
+	//diego->printHistory();
+	cList.getCustomer(1001)->printHistory();
+	Customer* tran = cList.getCustomer(1002);
+}
+
+void testMovieList() {
+	MovieList ml;
+	ml.addMovie('D', "Tran Le", "The Lion King", 2000, 1);
+	ml.addMovie('H', "Tran Le", "The Lion King", 2000, 10);
+	ml.addMovie('C', "Director", "movie", 2000, "actor", 9, 10);
+	ml.addMovie('U', "Director", "movie", 2000, "actor", 9, 10);
+	ml.decrementMovie('D', "Tran Le", "The Lion King");
+	ml.decrementMovie('D', "Tran Le", "The Lion King");
+	ml.decrementMovie('D', "Tran Le", "Blahblah");
+
+
+}
+
 
 int main() {
 	//testingPrint();
 	//testingOpEquals();
-	testingGreaterLess();
+	//testingGreaterLess();
+
+	//testCustomer();
+	//testCustomerList();
+	
+	testMovieList();
 
 	return 0;
 }

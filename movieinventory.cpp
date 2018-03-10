@@ -6,7 +6,7 @@ MovieInventory::MovieInventory(Movie* m, const int quantity, char mediaType) {
 	if (mediaType == 'D') 
 		mediaQuantity[DVD] = quantity;
 	else
-		cout << "Incorrect media type, you better set this later yourself" << endl; 
+		cout << "ERROR: " << mediaType << " is an incorrect media type." << endl; 
 }
 
 MovieInventory::~MovieInventory() {

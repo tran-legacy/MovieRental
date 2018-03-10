@@ -15,7 +15,7 @@ public:
 	bool operator==(const Movie& obj) const override;
 	bool operator<(const Movie& movieObj) const override;
 	bool operator>(const Movie& movieObj) const override;
-	Movie& operator=(const Movie& movieObj) override; 
+	//Movie& operator=(const Movie& movieObj) override; 
 
 	void print() const override;
 
