@@ -55,7 +55,7 @@ private:
 	const static int C = 2; 
 
 	const static char DVD = 'D';
-	vector<list<MovieInventory>> movieList;
+	vector<list<MovieInventory*>> movieList;
 
 	MovieFactory factory;
 };

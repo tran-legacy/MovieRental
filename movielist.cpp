@@ -9,7 +9,11 @@ MovieList::MovieList() {
 // Empty destructor
 MovieList::~MovieList() {
 	// We newed movie list, delete that shit
-	cout << "TODO: PLEASE DELETE MOVIEINVENTORY IN MOVIELIST" << endl;
+	for (size_t i = 0; i < movieList.size(); ++i) {
+		for (list<MovieInventory*>::iterator it = movieList[i].begin(); it != movieList[i].end(); ++it) {
+			delete *it;
+		}
+	}
 }
 
 // Add movie for comedy and drama
@@ -31,24 +35,24 @@ bool MovieList::addMovie(const char genre, const string& directorName,
 	
 	// If first in list
 	if (movieList[index].empty()) {
-		movieList[index].push_back(*(new MovieInventory(movieToAdd, quantity, 'D')));
+		movieList[index].push_back(new MovieInventory(movieToAdd, quantity, 'D'));
 		return true;
 	}
 	
-	for (list<MovieInventory>::iterator it = movieList[index].begin(); it != movieList[index].end(); ++it) {
-		Movie* movieToCheck = it->getMovie();
+	for (list<MovieInventory*>::iterator it = movieList[index].begin(); it != movieList[index].end(); ++it) {
+		Movie* movieToCheck = (*it)->getMovie();
 		// If movie already exists in the list
 		if (movieToAdd == movieToCheck) {
 			delete movieToAdd;
-			it->increaseQuantity(quantity);
+			(*it)->increaseQuantity(quantity);
 			return true;
 		} else if (movieToAdd < movieToCheck) {  // If movie to add is now smaller than where the iterator is
-			movieList[index].insert(it, *(new MovieInventory(movieToAdd, quantity, 'D')));
+			movieList[index].insert(it, new MovieInventory(movieToAdd, quantity, 'D'));
 			return true;
 		}
 	}
 	// broke out of for loop, means the movie is not in the list and it's the biggest
-	movieList[index].push_back(*(new MovieInventory(movieToAdd, quantity, 'D')));
+	movieList[index].push_back(new MovieInventory(movieToAdd, quantity, 'D'));
 	return true;
 }
 
@@ -69,12 +73,12 @@ bool MovieList::addMovie(const char genre, const string & directorName, const st
 
 	// If first in list
 	if (movieList[index].empty()) {
-		movieList[index].push_back(*(new MovieInventory(movieToAdd, quantity, 'D')));
+		movieList[index].push_back(new MovieInventory(movieToAdd, quantity, 'D'));
 		return true;
 	}
 
-	for (list<MovieInventory>::iterator it = movieList[index].begin(); it != movieList[index].end(); ++it) {
-		Movie* movieToCheck = it->getMovie();
+	for (list<MovieInventory*>::iterator it = movieList[index].begin(); it != movieList[index].end(); ++it) {
+		Movie* movieToCheck = (*it)->getMovie();
 		// If movie already exists in the list
 		if (movieToAdd == movieToCheck) {
 			delete movieToAdd;
@@ -83,15 +87,15 @@ bool MovieList::addMovie(const char genre, const string & directorName, const st
 			if (!classicMovie->findMajorActor(majorActor))
 				classicMovie->addMajorActor(majorActor);
 			// Increase quantity based on parameter
-			it->increaseQuantity(quantity);
+			(*it)->increaseQuantity(quantity);
 			return true;
 		} else if (movieToAdd < movieToCheck) {  // If movie to add is now smaller than where the iterator is
-			movieList[index].insert(it, *(new MovieInventory(movieToAdd, quantity, 'D')));
+			movieList[index].insert(it, new MovieInventory(movieToAdd, quantity, 'D'));
 			return true;
 		}
 	}
 	// broke out of for loop, means the movie is not in the list and it's the biggest
-	movieList[index].push_back(*(new MovieInventory(movieToAdd, quantity, 'D')));
+	movieList[index].push_back(new MovieInventory(movieToAdd, quantity, 'D'));
 	return true;
 }
 
@@ -102,9 +106,9 @@ bool MovieList::incrementMovie(const char mediaType, const int releaseMonth,
 	const int releaseYear, const string& majorActor) {
 	if (!isDVD(mediaType)) return false;
 	// Loop through the classic movie bucket
-	for (list<MovieInventory>::iterator it = movieList[C].begin(); 
+	for (list<MovieInventory*>::iterator it = movieList[C].begin(); 
 		it != movieList[C].end(); ++it) {
-		Movie* classicM = it->getMovie();
+		Movie* classicM = (*it)->getMovie();
 		// Dynamic cast so it knows what to call 
 		const ClassicMovie* classicMovie = dynamic_cast<const ClassicMovie*>(classicM);
 
@@ -112,7 +116,7 @@ bool MovieList::incrementMovie(const char mediaType, const int releaseMonth,
 		if (classicM->getReleaseYear() == releaseYear &&
 			classicMovie->getReleaseMonth() == releaseMonth &&
 			classicMovie->findMajorActor(majorActor)) {
-			it->increaseQuantity(1);
+			(*it)->increaseQuantity(1);
 			return true;
 		}
 	}
@@ -125,16 +129,16 @@ bool MovieList::decrementMovie(const char mediaType, const int releaseMonth,
 	const int releaseYear, const string & majorActor) {
 	if (!isDVD(mediaType)) return false;
 	// Loop through the classic movie bucket
-	for (list<MovieInventory>::iterator it = movieList[C].begin(); it != movieList[C].end(); ++it) {
-		Movie* classicM = it->getMovie();
+	for (list<MovieInventory*>::iterator it = movieList[C].begin(); it != movieList[C].end(); ++it) {
+		Movie* classicM = (*it)->getMovie();
 		// Dynamic cast so it knows what to call 
 		const ClassicMovie* classicMovie = dynamic_cast<const ClassicMovie*>(classicM);
 		// If the values match
 		if (classicM->getReleaseYear() == releaseYear &&
 			classicMovie->getReleaseMonth() == releaseMonth &&
 			classicMovie->findMajorActor(majorActor)) {
-			if (it->getQuantity() > 0) {  // if quantity is bigger than 0
-				it->decreaseQuantity(1);
+			if ((*it)->getQuantity() > 0) {  // if quantity is bigger than 0
+				(*it)->decreaseQuantity(1);
 				return true;
 			} else {  // quantity is 0
 				cout << "ERROR:" << releaseMonth << " " << releaseYear << " "
@@ -154,12 +158,12 @@ bool MovieList::incrementMovie(const char mediaType, const string& title,
 	const int releaseYear) {
 	if (!isDVD(mediaType)) return false;
 	// For each movie in the comedy movie bucket
-	for (list<MovieInventory>::iterator it = movieList[F].begin(); it != movieList[F].end(); ++it) {
-		Movie* comedyM = it->getMovie();
+	for (list<MovieInventory*>::iterator it = movieList[F].begin(); it != movieList[F].end(); ++it) {
+		Movie* comedyM = (*it)->getMovie();
 		// if the values match, we found the movie in the bucket
 		if (comedyM->getMovieTitle() == title &&
 			comedyM->getReleaseYear() == releaseYear) {
-			it->increaseQuantity(1);
+			(*it)->increaseQuantity(1);
 			return true;
 		}
 	}
@@ -172,14 +176,14 @@ bool MovieList::decrementMovie(const char mediaType, const string & title,
 	const int releaseYear) {
 	if (!isDVD(mediaType)) return false;
 	// For each movie in the comedy movie bucket
-	for (list<MovieInventory>::iterator it = movieList[F].begin(); it != movieList[F].end(); ++it) {
-		Movie* comedyM = it->getMovie();
+	for (list<MovieInventory*>::iterator it = movieList[F].begin(); it != movieList[F].end(); ++it) {
+		Movie* comedyM = (*it)->getMovie();
 		// if the values match
 		if (comedyM->getMovieTitle() == title &&
 			comedyM->getReleaseYear() == releaseYear) {
 			// Values match and it's in stock
-			if (it->getQuantity() > 0) { 
-				it->decreaseQuantity(1);
+			if ((*it)->getQuantity() > 0) { 
+				(*it)->decreaseQuantity(1);
 				return true;
 			} else { // else quantity is 0
 				cout << "ERROR: " << title << ", " << releaseYear <<
@@ -200,12 +204,12 @@ bool MovieList::incrementMovie(const char mediaType, const string& director,
 	if (!isDVD(mediaType)) return false;
 
 	// For each movie in the comedy movie bucket
-	for (list<MovieInventory>::iterator it = movieList[D].begin(); it != movieList[D].end(); ++it) {
-		Movie* dramaM = it->getMovie();
+	for (list<MovieInventory*>::iterator it = movieList[D].begin(); it != movieList[D].end(); ++it) {
+		Movie* dramaM = (*it)->getMovie();
 		// if the values match, we found the movie in the bucket
 		if (dramaM->getDirectorName() == director &&
 			dramaM->getMovieTitle() == title) {
-			it->increaseQuantity(1);
+			(*it)->increaseQuantity(1);
 			return true;
 		}
 	}
@@ -218,14 +222,14 @@ bool MovieList::decrementMovie(const char mediaType, const string & director, co
 	if (!isDVD(mediaType)) return false;
 	
 	// For each movie in the comedy movie bucket
-	for (list<MovieInventory>::iterator it = movieList[D].begin(); it != movieList[D].end(); ++it) {
-		Movie* dramaM = it->getMovie();
+	for (list<MovieInventory*>::iterator it = movieList[D].begin(); it != movieList[D].end(); ++it) {
+		Movie* dramaM = (*it)->getMovie();
 		// if the values match
 		if (dramaM->getDirectorName() == director &&
 			dramaM->getMovieTitle() == title) {
 			// Values match and it's in stock
-			if (it->getQuantity() > 0) {
-				it->decreaseQuantity(1);
+			if ((*it)->getQuantity() > 0) {
+				(*it)->decreaseQuantity(1);
 				return true;
 			} else { // else quantity is 0
 				cout << "ERROR: " << director<< ", " << title <<
