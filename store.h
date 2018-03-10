@@ -12,9 +12,9 @@ public:
 	Store();
 	virtual ~Store();
 
-	void populateMovie(string& infile);
-	void populateCustomer(ifstream infile);
-	void commandHandler(ifstream infile);
+	void populateMovie(string& file);
+	void populateCustomer(string& file);
+	void commandHandler(string& file);
 	void printCustomerHistory(const string& customer);
 	void printInventory();
 	bool borrowMovie(const string& command);

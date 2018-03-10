@@ -66,13 +66,14 @@ void Store::populateMovie(string& filename) {
 	// Check to make sure the file exists
 	if (infile.fail()) {
 		cout << "The file was not found." << endl;
+		return;
 	}
 	// Creaating the delimeter to break up the string
 	string delimiter = ", ";
 	// String to catch the line
 	string line;
 
-	// Loop through each line in the dile
+	// Loop through each line in the file
 	while (getline(infile, line)) {
 		// Create a sstream on the line
 		istringstream iss(line);
@@ -99,6 +100,87 @@ void Store::populateMovie(string& filename) {
 	}
 }
 
+// Reads in the customer list from a file and adds it to the
+// customer list object
+void Store::populateCustomer(string & filename){
+	ifstream infile;
+	infile.open(filename);
+	// Check to make sure the file exists
+	if (infile.fail()) {
+		cout << "The file was not found." << endl;
+		return;
+	}
+	string line;
+	// Loop through each line in the file
+	while (getline(infile, line)) {
+		vector<string> tokenList;
+		string token;
+		char delimeter = ' ';
+		istringstream tokenStream(line);
+		// Break line up using space as delimeter
+		while (getline(tokenStream, token, delimeter)) {
+			tokenList.push_back(token);
+		}
+		int customerID = stoi(tokenList[0]);
+		string customerName = tokenList[1] + " " + tokenList[2];
+		customerList.addCustomer(customerID, customerName);
+	}
+}
+
+void Store::commandHandler(string& filename){
+	ifstream infile;
+	infile.open(filename);
+	// Check to make sure the file exists
+	if (infile.fail()) {
+		cout << "The file was not found." << endl;
+		return;
+	}
+	string line;
+	while (getline(infile, line)) {
+		char command = line[0];
+		switch (command) {
+			case 'B':
+				cout << "HIT BORROW" << endl;
+				//borrowMovie(line);
+				break;
+			case 'R':
+				cout << "HIT RETURN" << endl;
+				//returnMovie(line);
+				break;
+			case 'I':
+				cout << "HIT INVENTORY" << endl;
+				//printInventory();
+				break;
+			case 'H':
+				cout << "HIT HISTORY" << endl;
+				//printCustomerHistory(line);
+				break;
+			default:
+				cout << "ERROR: '" << command << "' is not a valid command." << endl;
+				break;
+		}
+	}
+
+}
+
+// maybe need helper for parsing command, or change param to line (command)
+void Store::printCustomerHistory(const string & customer){
+	cout << "PRINT CUSTOMER " << customer << ", not implemented yet" << endl;
+}
+
+// Calls printMovies which will print out the inventory
 void Store::printInventory(){
 	movieList.printMovies();
+}
+
+bool Store::borrowMovie(const string & command)
+{
+	cout << "BORROW MOVIE, not implemented yet" << endl;
+	return false;
+}
+
+bool Store::returnMovie(const string & command)
+{
+	cout << "RETURN MOVIE, not implemented yet" << endl;
+	return false;
 }

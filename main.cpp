@@ -235,8 +235,12 @@ void testStore() {
 	// Maybe pass by copy, otherwise have to save the file name as a variable
 	// ? ? ? ?
 	string movieData = "data4movies.txt";
-	store.populateMovie(movieData);
-	store.printInventory();
+	string customerData = "data4customers.txt";
+	string commandData = "data4commands.txt";
+	store.commandHandler(commandData);
+	//store.populateCustomer(customerData);
+	//store.populateMovie(movieData);
+	//store.printInventory();
 
 }
 
