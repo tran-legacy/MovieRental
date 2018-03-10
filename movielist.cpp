@@ -8,8 +8,8 @@ MovieList::MovieList() {
 
 // Empty destructor
 MovieList::~MovieList() {
-	// We newed MovieInventory, delete that shit
-	
+	// We newed movie list, delete that shit
+	cout << "TODO: PLEASE DELETE MOVIEINVENTORY IN MOVIELIST" << endl;
 }
 
 // Add movie for comedy and drama
