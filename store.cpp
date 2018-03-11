@@ -165,7 +165,26 @@ void Store::commandHandler(string& filename){
 
 // maybe need helper for parsing command, or change param to line (command)
 void Store::printCustomerHistory(const string & customer){
-	cout << "PRINT CUSTOMER " << customer << ", not implemented yet" << endl;
+	// When this method is called, the line is guranteed to start with H
+	// Pare the string first: H 1222
+	vector<string> tokenList;
+	string token;
+	char delimeter = ' ';
+	istringstream tokenStream(customer);
+	// Break line up using space as delimeter
+	while (getline(tokenStream, token, delimeter)) {
+		tokenList.push_back(token);
+	}
+	int customerID = stoi(tokenList[1]);
+
+	Customer* customerPtr = customerList.getCustomer(customerID);
+	// getCustomer() will return nullptr if it couldn't find it
+	if (customerPtr == nullptr) {  
+		cout << "Customer with ID#" << customerID << " could not be found." << endl;
+		return;
+	} else {  // else it did find it, print the history
+		customerPtr->printHistory(); 
+	}
 }
 
 // Calls printMovies which will print out the inventory
