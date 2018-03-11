@@ -1,6 +1,7 @@
 #include "classicmovie.h"
 #include <iostream>
 
+// 
 ClassicMovie::ClassicMovie(const string& directorName, const string& movieTitle,
 						   const int releaseYear, const string & majorActor, 
 						   int releaseMonth)

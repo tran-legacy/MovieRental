@@ -7,7 +7,7 @@ void Customer::printHistory() const {
 	cout << "***History of " << this->ID << " (" << this->customerName  << ")***" << endl;
 	history.print();
 	cout << "***End history of " << this->ID << " (" << this->customerName
-		<< ")***" << endl;
+		<< ")***" << endl << endl;
 }
 
 void Customer::addIntoHistory(const string& customerTransaction) {

@@ -1,5 +1,0 @@
-F, 10, Nora Ephron, Zou've Got Mail, 1998
-F, 10, Gore Verbinski, Pirates of the Caribbean, 2003
-F, 10, Joel Coen, Fargo, 1996
-F, 10, Nora Ephron, Mulan, 1998
-F, 10, Nora Ephron, You've Got Mail, 1998
