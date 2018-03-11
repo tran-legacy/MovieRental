@@ -237,10 +237,11 @@ void testStore() {
 	string movieData = "data4movies.txt";
 	string customerData = "data4customers.txt";
 	string commandData = "data4commands.txt";
-	store.commandHandler(commandData);
-	//store.populateCustomer(customerData);
-	//store.populateMovie(movieData);
-	//store.printInventory();
+	string testcommands = "data4testcommands.txt";
+	store.populateCustomer(customerData);
+	store.populateMovie(movieData);
+	store.printInventory();
+	store.commandHandler(testcommands);
 
 }
 

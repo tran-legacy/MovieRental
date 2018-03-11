@@ -16,8 +16,6 @@ public:
 	void printHistory() const;
 	// Add a new transaction into this customer history
 	void addIntoHistory(const string& customerTransaction); 
-	void checkOut(); // not sure about param 
-	void checkIn(); // Not sure about param
 
 	// Get customerID
 	int getID() const;
