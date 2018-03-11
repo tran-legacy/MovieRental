@@ -160,7 +160,7 @@ void Store::commandHandler(string& filename){
 	}
 
 }
-
+//
 // maybe need helper for parsing command, or change param to line (command)
 void Store::printCustomerHistory(const string & customer){
 	cout << "PRINT CUSTOMER " << customer << ", not implemented yet" << endl;
