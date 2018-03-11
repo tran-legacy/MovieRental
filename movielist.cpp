@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+// Names	  : Tran Le and Nicholas Gorsline
+// Date	      : 3/10/2017
+// Project    : Assignment 4: Movie Rental Store
+// Course     : Pisan, CSS 343
+// File Desc  : List of movies that will hold the movie inventory objects, and
+//              sort the movies by specific criteria
+///////////////////////////////////////////////////////////////////////////////
+
 #include "movielist.h"
 #include <iostream>
 #include <iomanip>

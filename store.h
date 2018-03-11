@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+// Names	  : Tran Le and Nicholas Gorsline
+// Date	      : 3/10/2017
+// Project    : Assignment 4: Movie Rental Store
+// Course     : Pisan, CSS 343
+// File Desc  : Store that will handle populating and command handling for
+//              the project.
+///////////////////////////////////////////////////////////////////////////////
+
 #ifndef STORE_H
 #define STORE_H
 

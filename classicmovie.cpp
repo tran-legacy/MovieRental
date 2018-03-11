@@ -1,7 +1,15 @@
+///////////////////////////////////////////////////////////////////////////////
+// Names	  : Tran Le and Nicholas Gorsline
+// Date	      : 3/10/2017
+// Project    : Assignment 4: Movie Rental Store
+// Course     : Pisan, CSS 343
+// File Desc  : Classic movie, inherits from movie
+///////////////////////////////////////////////////////////////////////////////
+
 #include "classicmovie.h"
 #include <iostream>
 
-// 
+// Constuctor that will create the movie based on the given parameters
 ClassicMovie::ClassicMovie(const string& directorName, const string& movieTitle,
 						   const int releaseYear, const string & majorActor, 
 						   int releaseMonth)
@@ -10,8 +18,10 @@ ClassicMovie::ClassicMovie(const string& directorName, const string& movieTitle,
 	this->releaseMonth = releaseMonth;
 }
 
+// Destructor
 ClassicMovie::~ClassicMovie() {}
 
+// Prints out the information about the movie
 void ClassicMovie::print() const {
 	cout << CLASSIC << ", " << this->directorName << ", " << this->movieTitle
 		<< ", ";
@@ -21,7 +31,7 @@ void ClassicMovie::print() const {
 	cout << this->releaseMonth << " " << this->releaseYear << endl;
 }
 
-// 
+// Checks to see if the specified major actor has been added to the movie
 bool ClassicMovie::findMajorActor(const string& actor) const {
 	for (size_t i = 0; i < majorActor.size(); ++i) {
 		if (majorActor.at(i) == actor) {
@@ -31,10 +41,12 @@ bool ClassicMovie::findMajorActor(const string& actor) const {
 	return false;
 }
 
-const int ClassicMovie::getReleaseMonth() const {
+// Returns release month
+int ClassicMovie::getReleaseMonth() const {
 	return releaseMonth;
 }
 
+// Return major actor
 string ClassicMovie::getMajorActor() const {
 	return majorActor[0];
 }
@@ -46,7 +58,8 @@ void ClassicMovie::addMajorActor(const string & actor){
 
 // Does not check for major actors since it's an array
 bool ClassicMovie::operator==(const Movie& movieObjOrig) const {
-	const ClassicMovie& movieObj = dynamic_cast<const ClassicMovie&>(movieObjOrig);
+	const ClassicMovie& movieObj = dynamic_cast<const ClassicMovie&>
+		(movieObjOrig);
 	if (this == &movieObj) return true;
 	// Check if all fields are equal to each other
 	return (this->directorName == movieObj.getDirectorName() &&
@@ -57,9 +70,10 @@ bool ClassicMovie::operator==(const Movie& movieObjOrig) const {
 
 bool ClassicMovie::operator<(const Movie& movieObjOrig) const{
 	// Cast the Movie* into classic movie so we have access to its data
-	const ClassicMovie& movieObj = dynamic_cast<const ClassicMovie&>(movieObjOrig);
-
-	if (this->releaseYear < movieObj.getReleaseYear()) {  // Check if year is equal
+	const ClassicMovie& movieObj = dynamic_cast<const ClassicMovie&>
+		(movieObjOrig);
+	// Check if year is equal
+	if (this->releaseYear < movieObj.getReleaseYear()) {  
 		return true;
 	} else if (this->releaseYear > movieObj.getReleaseYear()) {
 		return false;
@@ -79,9 +93,7 @@ bool ClassicMovie::operator<(const Movie& movieObjOrig) const{
 	return false;
 }
 
+// Operator >, uses operator < for functionality
 bool ClassicMovie::operator>(const Movie& movieObj) const{
 	return !(*this < movieObj);
 }
-
-
-

@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+// Names	  : Tran Le and Nicholas Gorsline
+// Date	      : 3/10/2017
+// Project    : Assignment 4: Movie Rental Store
+// Course     : Pisan, CSS 343
+// File Desc  : Store that will handle populating and command handling for
+//              the project.
+///////////////////////////////////////////////////////////////////////////////
+
 #include "store.h"
 #include <iostream>
 #include <sstream>
@@ -6,7 +15,6 @@
 
 Store::Store() {
 }
-
 
 Store::~Store() {
 }

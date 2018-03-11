@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////
+// Names	  : Tran Le and Nicholas Gorsline
+// Date	      : 3/10/2017
+// Project    : Assignment 4: Movie Rental Store
+// Course     : Pisan, CSS 343
+// File Desc  : History file that tracks a users transactions
+///////////////////////////////////////////////////////////////////////////////
+
 #ifndef HISTORY_H
 #define HISTORY_H
 

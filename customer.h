@@ -1,3 +1,10 @@
+///////////////////////////////////////////////////////////////////////////////
+// Names	  : Tran Le and Nicholas Gorsline
+// Date	      : 3/10/2017
+// Project    : Assignment 4: Movie Rental Store
+// Course     : Pisan, CSS 343
+// File Desc  : Header file for customer
+///////////////////////////////////////////////////////////////////////////////
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
 

@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+// Names	  : Tran Le and Nicholas Gorsline
+// Date	      : 3/10/2017
+// Project    : Assignment 4: Movie Rental Store
+// Course     : Pisan, CSS 343
+// File Desc  : Movie inventory that will handle all of the management of
+//              the movies stock. It will handle increasing and decreasing
+//              quantity
+///////////////////////////////////////////////////////////////////////////////
+
 #ifndef MOVIEINVENTORY_H
 #define MOVIEINVENTORY_H
 #include "movie.h"

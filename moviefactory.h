@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+// Names	  : Tran Le and Nicholas Gorsline
+// Date	      : 3/10/2017
+// Project    : Assignment 4: Movie Rental Store
+// Course     : Pisan, CSS 343
+// File Desc  : Movie factory that will genereate a new movie based of the
+//              given parameters and return a pointer to that object
+///////////////////////////////////////////////////////////////////////////////
+
 #ifndef MOVIEFACTORY_H
 #define MOVIEFACTORY_H
 

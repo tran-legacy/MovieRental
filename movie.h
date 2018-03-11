@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+// Names	  : Tran Le and Nicholas Gorsline
+// Date	      : 3/10/2017
+// Project    : Assignment 4: Movie Rental Store
+// Course     : Pisan, CSS 343
+// File Desc  : Movie class that classic, comedy, and drama. 
+//			    All methods will be overriden by the child class.
+///////////////////////////////////////////////////////////////////////////////
+
 #ifndef MOVIE_H
 #define MOVIE_H
 
