@@ -42,11 +42,11 @@ bool MovieList::addMovie(const char genre, const string& directorName,
 	for (list<MovieInventory*>::iterator it = movieList[index].begin(); it != movieList[index].end(); ++it) {
 		Movie* movieToCheck = (*it)->getMovie();
 		// If movie already exists in the list
-		if (movieToAdd == movieToCheck) {
+		if (*movieToAdd == *movieToCheck) {
 			delete movieToAdd;
 			(*it)->increaseQuantity(quantity);
 			return true;
-		} else if (movieToAdd < movieToCheck) {  // If movie to add is now smaller than where the iterator is
+		} else if (*movieToAdd < *movieToCheck) {  // If movie to add is now smaller than where the iterator is
 			movieList[index].insert(it, new MovieInventory(movieToAdd, quantity, 'D'));
 			return true;
 		}
@@ -80,7 +80,7 @@ bool MovieList::addMovie(const char genre, const string & directorName, const st
 	for (list<MovieInventory*>::iterator it = movieList[index].begin(); it != movieList[index].end(); ++it) {
 		Movie* movieToCheck = (*it)->getMovie();
 		// If movie already exists in the list
-		if (movieToAdd == movieToCheck) {
+		if (*movieToAdd == *movieToCheck) {
 			delete movieToAdd;
 			ClassicMovie* classicMovie = dynamic_cast<ClassicMovie*>(movieToCheck);
 			// If the major actor is not recorded in the existing classic movie, record it
@@ -89,7 +89,7 @@ bool MovieList::addMovie(const char genre, const string & directorName, const st
 			// Increase quantity based on parameter
 			(*it)->increaseQuantity(quantity);
 			return true;
-		} else if (movieToAdd < movieToCheck) {  // If movie to add is now smaller than where the iterator is
+		} else if (*movieToAdd < *movieToCheck) {  // If movie to add is now smaller than where the iterator is
 			movieList[index].insert(it, new MovieInventory(movieToAdd, quantity, 'D'));
 			return true;
 		}

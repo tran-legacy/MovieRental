@@ -124,7 +124,6 @@ void Store::populateCustomer(string & filename) {
 		int customerID = stoi(tokenList[0]);
 		string customerName = tokenList[1] + " " + tokenList[2];
 		customerList.addCustomer(customerID, customerName);
-		cout << customerName << endl;
 	}
 }
 
