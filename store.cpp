@@ -124,6 +124,7 @@ void Store::populateCustomer(string & filename){
 		int customerID = stoi(tokenList[0]);
 		string customerName = tokenList[1] + " " + tokenList[2];
 		customerList.addCustomer(customerID, customerName);
+		cout << customerName << endl;
 	}
 }
 
@@ -140,16 +141,13 @@ void Store::commandHandler(string& filename){
 		char command = line[0];
 		switch (command) {
 			case 'B':
-				cout << "HIT BORROW" << endl;
-				//borrowMovie(line);
+				borrowMovie(line);
 				break;
 			case 'R':
-				cout << "HIT RETURN" << endl;
 				//returnMovie(line);
 				break;
 			case 'I':
-				cout << "HIT INVENTORY" << endl;
-				//printInventory();
+				printInventory();
 				break;
 			case 'H':
 				cout << "HIT HISTORY" << endl;
@@ -173,14 +171,129 @@ void Store::printInventory(){
 	movieList.printMovies();
 }
 
-bool Store::borrowMovie(const string & command)
-{
-	cout << "BORROW MOVIE, not implemented yet" << endl;
-	return false;
+bool Store::borrowMovie(const string & command){
+	// Parse string
+	vector<string> tokenList;
+	string token;
+	char delimeter = ' ';
+	istringstream tokenStream(command);
+	// Get the first four tokens, then proceed accordingly
+	int count = 0;
+	while (count < 4) {
+		getline(tokenStream, token, delimeter);
+		tokenList.push_back(token);
+		++count;
+	}
+	// Grab movie information and add to vector for further parsing depending on the movie type
+	getline(tokenStream, token);
+	tokenList.push_back(token);
+
+	// Store information from vector
+	string borrowCommand = tokenList[0];
+	int customerId = stoi(tokenList[1]);
+	char mediaType = tokenList[2][0];
+	char genre = tokenList[3][0];
+	// Need to check movie type before extracting information
+	string movieInformation = tokenList[4];
+
+	//Grab customer from customer ID
+	Customer* customer = customerList.getCustomer(customerId);
+	// Check if customer is in the system
+	if (!customer) {
+		cout << "ERROR: Customer '" << customerId << "' does not exist." << endl;
+		return false;
+	}
+	// Check if the media type is valid, currently DVD 'D' is the only accepted type
+	else if (mediaType != 'D') {
+		cout << "ERROR: Type of media '" << mediaType << "' does not exist." << endl;
+		return false;
+	}
+	
+	// Variables for drama and comedy
+	string title;
+	string director;
+	int year;
+	// Variables for classic
+	vector<string> tList;
+	string majorActor;
+	int month;
+	string tToken;
+	char tDelimeter = ' ';
+	istringstream tss(movieInformation);
+
+	bool result;
+
+	switch (genre) {
+		case 'F':
+			title = movieInformation.substr(0, movieInformation.find(", "));
+			year = stoi(movieInformation.substr(movieInformation.find(", ")+2)); //+2 to get rid of the ', '
+			// Remove one movie from movie inventory
+			result = movieList.decrementMovie(mediaType, title, year);
+			// Add transaction to customer history if movie was removed from inventory
+			if (result) {
+				customer->addIntoHistory(borrowCommand + " " + mediaType + " " + genre + " " + title + " " + to_string(year));
+			}
+			else {
+				return false;
+			}
+			break;
+		case 'D':
+			director = movieInformation.substr(0, movieInformation.find(", "));
+			title = movieInformation.substr(movieInformation.find(", ") +2); // +2 to move past ', '
+			title = title.substr(0, title.length() - 1); //-1 to get rid of trailing comma
+			// Remove one movie from movie inventory
+			result = movieList.decrementMovie(mediaType, director, title);
+			// Add transaction to customer history
+			if (result) {
+				customer->addIntoHistory(borrowCommand + " " + mediaType + " " + genre + " " + director + " " + title);
+			}
+			else {
+				return false;
+			}
+			break;
+		case 'C': 
+			// Break line up using space as delimeter
+			while (getline(tss, tToken, tDelimeter)) {
+				tList.push_back(tToken);
+			}
+
+			month = stoi(tList[0]);
+			year = stoi(tList[1]);
+			majorActor = tList[2] + " " + tList[3];
+
+			// Remove one movie from movie inventory
+			result = movieList.decrementMovie(mediaType, month, year, majorActor);
+			// Add transaction to customer history
+			if (result) {
+				customer->addIntoHistory(borrowCommand + " " + mediaType + " " + genre + " " + to_string(month) + " " + to_string(year) + " " + majorActor);
+			}
+			else {
+				return false;
+			}
+			break;
+		default:
+			cout << "ERROR: '" << genre << "' is not a valid genre." << endl;
+			break;
+	}
+
+
+
+
+
+
+	// Grab customer from customer id and make sure it exists. else, return false
+	// check media type and make sure it is 'D'
+	// Check genre, if C: Month Year Major Actor
+	//				if D: Director, Title
+	//				if F: Title, year
+	//				if else: something else, return false
+	// if movie exists, check if there is at least 1 (might be handled somewhere else)
+	// if it can be borrowed, remove 1 from the inventory and add the transaction to the customer history
+	// return true
+	return true;
 }
 
-bool Store::returnMovie(const string & command)
-{
+bool Store::returnMovie(const string & command){
 	cout << "RETURN MOVIE, not implemented yet" << endl;
 	return false;
 }

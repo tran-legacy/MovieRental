@@ -18,7 +18,7 @@ public:
 private: 
 	// Const variable that is use for the modular hashing
 	const static int HASH_MOD = 289;
-	const static int SIZE = 238; 
+	const static int SIZE = 291; 
 	// Array of customer vectors
 	vector<Customer*> custList[SIZE];
 	// Our stupid hash function
