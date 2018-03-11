@@ -83,6 +83,9 @@ void Store::populateMovie(string& filename) {
 
 	// Loop through each line in the file
 	while (getline(infile, line)) {
+		if (line.back() == '\r') {
+			line = line.substr(0, line.length() - 1);
+		}
 		// Create a sstream on the line
 		istringstream iss(line);
 		// Keep track of position in the line
@@ -121,6 +124,9 @@ void Store::populateCustomer(string & filename) {
 	string line;
 	// Loop through each line in the file
 	while (getline(infile, line)) {
+		if (line.back() == '\r') {
+			line = line.substr(0, line.length() - 1);
+		}
 		vector<string> tokenList;
 		string token;
 		char delimeter = ' ';
@@ -145,6 +151,9 @@ void Store::commandHandler(string& filename) {
 	}
 	string line;
 	while (getline(infile, line)) {
+		if (line.back() =='\r') {
+			line = line.substr(0, line.length() - 1);
+		}
 		char command = line[0];
 		switch (command) {
 		case 'B':
