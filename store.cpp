@@ -102,7 +102,7 @@ void Store::populateMovie(string& filename) {
 
 // Reads in the customer list from a file and adds it to the
 // customer list object
-void Store::populateCustomer(string & filename){
+void Store::populateCustomer(string & filename) {
 	ifstream infile;
 	infile.open(filename);
 	// Check to make sure the file exists
@@ -128,7 +128,7 @@ void Store::populateCustomer(string & filename){
 	}
 }
 
-void Store::commandHandler(string& filename){
+void Store::commandHandler(string& filename) {
 	ifstream infile;
 	infile.open(filename);
 	// Check to make sure the file exists
@@ -140,38 +140,57 @@ void Store::commandHandler(string& filename){
 	while (getline(infile, line)) {
 		char command = line[0];
 		switch (command) {
-			case 'B':
-				borrowMovie(line);
-				break;
-			case 'R':
-				//returnMovie(line);
-				break;
-			case 'I':
-				printInventory();
-				break;
-			case 'H':
-				cout << "HIT HISTORY" << endl;
-				//printCustomerHistory(line);
-				break;
-			default:
-				cout << "ERROR: '" << command << "' is not a valid command." << endl;
-				break;
+		case 'B':
+			borrowMovie(line);
+			break;
+		case 'R':
+			//returnMovie(line);
+			break;
+		case 'I':
+			printInventory();
+			break;
+		case 'H':
+			cout << "HIT HISTORY" << endl;
+			//printCustomerHistory(line);
+			break;
+		default:
+			cout << "ERROR: '" << command << "' is not a valid command." << endl;
+			break;
 		}
 	}
 
 }
 //
 // maybe need helper for parsing command, or change param to line (command)
-void Store::printCustomerHistory(const string & customer){
-	cout << "PRINT CUSTOMER " << customer << ", not implemented yet" << endl;
+void Store::printCustomerHistory(const string & customer) {
+	// When this method is called, the line is guranteed to start with H
+	// Pare the string first: H 1222
+	vector<string> tokenList;
+	string token;
+	char delimeter = ' ';
+	istringstream tokenStream(customer);
+	// Break line up using space as delimeter
+	while (getline(tokenStream, token, delimeter)) {
+		tokenList.push_back(token);
+	}
+	int customerID = stoi(tokenList[1]);
+
+	Customer* customerPtr = customerList.getCustomer(customerID);
+	// getCustomer() will return nullptr if it couldn't find it
+	if (customerPtr == nullptr) {
+		cout << "Customer with ID#" << customerID << " could not be found." << endl;
+		return;
+	} else {  // else it did find it, print the history
+		customerPtr->printHistory();
+	}
 }
 
 // Calls printMovies which will print out the inventory
-void Store::printInventory(){
+void Store::printInventory() {
 	movieList.printMovies();
 }
 
-bool Store::borrowMovie(const string & command){
+bool Store::borrowMovie(const string & command) {
 	// Parse string
 	vector<string> tokenList;
 	string token;
@@ -208,7 +227,7 @@ bool Store::borrowMovie(const string & command){
 		cout << "ERROR: Type of media '" << mediaType << "' does not exist." << endl;
 		return false;
 	}
-	
+
 	// Variables for drama and comedy
 	string title;
 	string director;
@@ -224,56 +243,53 @@ bool Store::borrowMovie(const string & command){
 	bool result;
 
 	switch (genre) {
-		case 'F':
-			title = movieInformation.substr(0, movieInformation.find(", "));
-			year = stoi(movieInformation.substr(movieInformation.find(", ")+2)); //+2 to get rid of the ', '
-			// Remove one movie from movie inventory
-			result = movieList.decrementMovie(mediaType, title, year);
-			// Add transaction to customer history if movie was removed from inventory
-			if (result) {
-				customer->addIntoHistory(borrowCommand + " " + mediaType + " " + genre + " " + title + " " + to_string(year));
-			}
-			else {
-				return false;
-			}
-			break;
-		case 'D':
-			director = movieInformation.substr(0, movieInformation.find(", "));
-			title = movieInformation.substr(movieInformation.find(", ") +2); // +2 to move past ', '
-			title = title.substr(0, title.length() - 1); //-1 to get rid of trailing comma
-			// Remove one movie from movie inventory
-			result = movieList.decrementMovie(mediaType, director, title);
-			// Add transaction to customer history
-			if (result) {
-				customer->addIntoHistory(borrowCommand + " " + mediaType + " " + genre + " " + director + " " + title);
-			}
-			else {
-				return false;
-			}
-			break;
-		case 'C': 
-			// Break line up using space as delimeter
-			while (getline(tss, tToken, tDelimeter)) {
-				tList.push_back(tToken);
-			}
+	case 'F':
+		title = movieInformation.substr(0, movieInformation.find(", "));
+		year = stoi(movieInformation.substr(movieInformation.find(", ") + 2)); //+2 to get rid of the ', '
+																			   // Remove one movie from movie inventory
+		result = movieList.decrementMovie(mediaType, title, year);
+		// Add transaction to customer history if movie was removed from inventory
+		if (result) {
+			customer->addIntoHistory(borrowCommand + " " + mediaType + " " + genre + " " + title + " " + to_string(year));
+		} else {
+			return false;
+		}
+		break;
+	case 'D':
+		director = movieInformation.substr(0, movieInformation.find(", "));
+		title = movieInformation.substr(movieInformation.find(", ") + 2); // +2 to move past ', '
+		title = title.substr(0, title.length() - 1); //-1 to get rid of trailing comma
+													 // Remove one movie from movie inventory
+		result = movieList.decrementMovie(mediaType, director, title);
+		// Add transaction to customer history
+		if (result) {
+			customer->addIntoHistory(borrowCommand + " " + mediaType + " " + genre + " " + director + " " + title);
+		} else {
+			return false;
+		}
+		break;
+	case 'C':
+		// Break line up using space as delimeter
+		while (getline(tss, tToken, tDelimeter)) {
+			tList.push_back(tToken);
+		}
 
-			month = stoi(tList[0]);
-			year = stoi(tList[1]);
-			majorActor = tList[2] + " " + tList[3];
+		month = stoi(tList[0]);
+		year = stoi(tList[1]);
+		majorActor = tList[2] + " " + tList[3];
 
-			// Remove one movie from movie inventory
-			result = movieList.decrementMovie(mediaType, month, year, majorActor);
-			// Add transaction to customer history
-			if (result) {
-				customer->addIntoHistory(borrowCommand + " " + mediaType + " " + genre + " " + to_string(month) + " " + to_string(year) + " " + majorActor);
-			}
-			else {
-				return false;
-			}
-			break;
-		default:
-			cout << "ERROR: '" << genre << "' is not a valid genre." << endl;
-			break;
+		// Remove one movie from movie inventory
+		result = movieList.decrementMovie(mediaType, month, year, majorActor);
+		// Add transaction to customer history
+		if (result) {
+			customer->addIntoHistory(borrowCommand + " " + mediaType + " " + genre + " " + to_string(month) + " " + to_string(year) + " " + majorActor);
+		} else {
+			return false;
+		}
+		break;
+	default:
+		cout << "ERROR: '" << genre << "' is not a valid genre." << endl;
+		break;
 	}
 
 
@@ -293,7 +309,7 @@ bool Store::borrowMovie(const string & command){
 	return true;
 }
 
-bool Store::returnMovie(const string & command){
+bool Store::returnMovie(const string & command) {
 	cout << "RETURN MOVIE, not implemented yet" << endl;
 	return false;
 }
